@@ -3,7 +3,9 @@ from numpy import loadtxt
 from keras.models import Sequential
 from keras.layers import Dense
 from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix, r2_score
+
+# All the files related to this model will be saved with this name
+filename = 'pima-indian-diabetes-dataset'
 
 # load the dataset
 dataset = loadtxt('datasets/pima-indian-diabetes-dataset/pima-indians-diabetes-dataset.csv', delimiter=',')
@@ -38,7 +40,7 @@ plt.title('Model Accuracy')
 plt.ylabel('accuracy')
 plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper left')
-plt.savefig('TrainingData/Accuracy/pima-indian-diabetes-dataset.png')
+plt.savefig('TrainingData/Accuracy/' + filename + '.png')
 plt.show()
 
 # "Loss"
@@ -48,12 +50,12 @@ plt.title('Model Loss')
 plt.ylabel('loss')
 plt.xlabel('epoch')
 plt.legend(['train', 'validation'], loc='upper right')
-plt.savefig('TrainingData/Loss/pima-indian-diabetes-dataset.png')
+plt.savefig('TrainingData/Loss/' + filename + '.png')
 plt.show()
 
 # evaluate the keras model
 metrics = model.evaluate(x_test, y_test)
-print(metrics)
+print('Accuracy of the model is {}'.format(metrics[1] * 100))
 
 # save model
-model.save('TrainedModels/pima-indian-diabetes-dataset.h5')
+model.save('TrainedModels/' + filename + '.h5')
